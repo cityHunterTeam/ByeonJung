@@ -1,6 +1,6 @@
 package admin;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class adminVO {
 	private String id ;
