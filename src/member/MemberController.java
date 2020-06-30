@@ -127,10 +127,45 @@ public class MemberController extends HttpServlet {
 		}else {
 			nextPage = "/mem/index.do";
 		}
-
+		
+		if(action==null || action.equals("/listMembers.do")) {
+			List membersList = memberDAO.listMembers();
+			
+			request.setAttribute("membersList", membersList);
+			
+			nextPage = "/member/listMembers.jsp";
+		}else if(action.equals("/modMemberForm.do")) {
+			String id = request.getParameter("id");
+			MemberVO memInfo = memberDAO.findMember(id);
+			request.setAttribute("memInfo", memInfo);
+			nextPage = "/member/memberForm.jsp";
+		}else if(action.equals("/modMember.do")) {
+			String id = request.getParameter("id");
+			String passwd = request.getParameter("passwd");
+			String name = request.getParameter("name");
+			String birth = request.getParameter("birth");
+			String email = request.getParameter("email");
+			String phone = request.getParameter("phone");
+			String address = request.getParameter("address");
+			
+			MemberVO memberVO = new MemberVO(id,passwd,name,birth,email,phone,address);
+			
+			memberDAO.modMember(memberVO);
+			
+			request.setAttribute("msg", "modified");
+			
+			nextPage="/member/listMembers.do";
+		}else if(action.equals("/delMembers.do")) {
+			String id = request.getParameter("id");
+			memberDAO.deleteMem(id);
+			request.setAttribute("msg", "deleted");
+			nextPage="/member/listMembers.do";
+		}else {
+			List membersList = memberDAO.listMembers();
+			request.setAttribute("membersList", membersList);
+			nextPage = "/member/listMembers.jsp";
+		}
 		RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 		dispatch.forward(request, response);
-
 	}
-
 }

@@ -12,6 +12,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.apache.tomcat.jni.Mmap;
+
 
 public class MemberDAO {
 	Connection con;
@@ -130,6 +132,33 @@ public class MemberDAO {
 		return vo;
 	}
 	
+	public List listMembers() {
+		List membersList = new ArrayList();
+		try {
+			con = getConnection();
+			String query = "select * from member order by joinDate desc";
+			System.out.println(query);
+			pstmt = con.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String id = rs.getString("id");
+				String passwd = rs.getString("passwd");
+				String name = rs.getString("name");
+				String address = rs.getString("address");
+				String birth = rs.getString("birth");
+				String phone = rs.getString("phone");
+				String email = rs.getString("email");
+				
+				MemberVO memberVO = new MemberVO(id,passwd,name,address,birth,phone,email);
+				membersList.add(memberVO);
+			}
+			freeResource();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return membersList ;
+	}
+	
 	
 	public void updateAll(MemberVO vo) {
 		try {
@@ -173,4 +202,69 @@ public class MemberDAO {
 		
 		}
 	}
+	public MemberVO findMember(String id) {
+		MemberVO memInfo = null ;
+		try {
+			con = getConnection();
+			String query = "select * from member where id =?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, id);
+			System.out.println(query);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			String id1 = rs.getString("id");
+			String passwd = rs.getString("passwd");
+			String name = rs.getString("name");
+			String address = rs.getString("address");
+			String birth = rs.getString("birth");
+			String phone = rs.getString("phone");
+			String email = rs.getString("email");
+			memInfo = new MemberVO(id,passwd,name,address,birth,phone,email);
+			freeResource();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return memInfo;
+	}
+	
+	public void modMember(MemberVO memberVO) {
+		String id = memberVO.getId();
+		String passwd = memberVO.getPasswd();
+		String name = memberVO.getName();
+		String address = memberVO.getAddress();
+		String birth = memberVO.getBirth();
+		String phone = memberVO.getPhone();
+		String email = memberVO.getEmail();
+		try {
+			con = getConnection();
+			String query = "update member set pwd=?,name=?,address=?birth=?,phone=?,email=? where id=?";
+			System.out.println(query);
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, passwd);
+			pstmt.setString(2, name);
+			pstmt.setString(3, address);
+			pstmt.setString(4, birth);
+			pstmt.setString(5, phone);
+			pstmt.setString(6, email);
+			pstmt.setString(7, id);
+			freeResource();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void delMember(String id) {
+		try { 
+			con =getConnection();
+			
+			String query = "delete from member where id = ?" ;
+			System.out.println(query);
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}//delMember
+	
 }
