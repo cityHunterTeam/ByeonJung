@@ -46,10 +46,10 @@ a {
 			<td width="7%"><b>아이디</b></td>
 			<td width="7%"><b>비밀번호</b></td>
 			<td width="7%"><b>이름</b></td>
-			<td width="7%"><b>주소</b></td>
 			<td width="7%"><b>생일</b></td>
-			<td width="7%"><b>휴대전화</b></td>
 			<td width="7%"><b>이메일</b></td>
+			<td width="7%"><b>휴대전화</b></td>
+			<td width="7%"><b>주소</b></td>
 		</tr>
 
 		<c:choose>
@@ -67,11 +67,10 @@ a {
 						<td>${mem.id }</td>
 						<td>${mem.passwd }</td>
 						<td>${mem.name }</td>
-						<td>${mem.address }</td>
 						<td>${mem.birth }</td>
-						<td>${mem.phone }</td>
 						<td>${mem.email }</td>
-		
+						<td>${mem.phone }</td>
+						<td>${mem.address }</td>
 					</tr>
 				</c:forEach>
 			</c:when>

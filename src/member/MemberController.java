@@ -135,18 +135,17 @@ public class MemberController extends HttpServlet {
 			nextPage = "/member/memberView.jsp";
 
 		} else if (action.equals("/memberViewPro.do")) {
-
+			
 			String passwd = request.getParameter("passwd");
 			String name = request.getParameter("name");
 			String birth = request.getParameter("birth");
 			String email = request.getParameter("email");
 			String phone = request.getParameter("phone");
 			String address = request.getParameter("address");
-
-			MemberVO vo3 = new MemberVO(passwd, name, birth, email, phone, address);
-			memberDAO.updateAll(vo3);
+			MemberVO vo = new MemberVO(passwd, name, birth, email, phone, address);
+			memberDAO.updateMember(vo);
 			nextPage = "/member/memberViewPro.jsp";
-
+			
 		} else if (action.equals("/delMembers.do")) {
 			String id = request.getParameter("id");
 			memberDAO.deleteMem(id);

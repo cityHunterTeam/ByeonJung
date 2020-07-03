@@ -144,12 +144,12 @@ public class MemberDAO {
 				String id = rs.getString("id");
 				String passwd = rs.getString("passwd");
 				String name = rs.getString("name");
-				String address = rs.getString("address");
 				String birth = rs.getString("birth");
-				String phone = rs.getString("phone");
 				String email = rs.getString("email");
+				String phone = rs.getString("phone");
+				String address = rs.getString("address");
 				
-				MemberVO memberVO = new MemberVO(id,passwd,name,address,birth,phone,email);
+				MemberVO memberVO = new MemberVO(id,passwd,name,birth,email,phone,address);
 				membersList.add(memberVO);
 			}
 			freeResource();
@@ -215,10 +215,10 @@ public class MemberDAO {
 			memInfo.setId( rs.getString("id"));
 			memInfo.setPasswd(rs.getString("passwd"));
 			memInfo.setName(rs.getString("name"));
-			memInfo.setAddress(rs.getString("address"));
 			memInfo.setBirth(rs.getString("birth"));
-			memInfo.setPhone(rs.getString("phone"));
 			memInfo.setEmail(rs.getString("email"));
+			memInfo.setPhone(rs.getString("phone"));
+			memInfo.setAddress(rs.getString("address"));
 			freeResource();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -226,29 +226,24 @@ public class MemberDAO {
 		return memInfo;
 	}
 	
-	public void modMember(MemberVO memberVO) {
-		String id = memberVO.getId();
-		String passwd = memberVO.getPasswd();
-		String name = memberVO.getName();
-		String address = memberVO.getAddress();
-		String birth = memberVO.getBirth();
-		String phone = memberVO.getPhone();
-		String email = memberVO.getEmail();
+	public void updateMember(MemberVO vo) {
 		try {
 			con = getConnection();
-			String query = "update member set pwd=?,name=?,address=?birth=?,phone=?,email=? where id=?";
-			System.out.println(query);
+			String query = "update member set passwd=?,name=?,birth=?,email=?,phone=?,address=?";
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, passwd);
-			pstmt.setString(2, name);
-			pstmt.setString(3, address);
-			pstmt.setString(4, birth);
-			pstmt.setString(5, phone);
-			pstmt.setString(6, email);
-			pstmt.setString(7, id);
-			freeResource();
-		}catch (Exception e) {
+			 
+			pstmt.setString(1,vo.getPasswd());
+			pstmt.setString(2,vo.getName());
+			pstmt.setString(3,vo.getBirth());
+			pstmt.setString(4,vo.getEmail());
+			pstmt.setString(5,vo.getPhone());
+			pstmt.setString(6,vo.getAddress());
+			
+			pstmt.executeUpdate();	//update 실행 
+		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			freeResource();
 		}
 	}
 	

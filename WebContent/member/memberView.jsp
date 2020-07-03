@@ -21,9 +21,6 @@
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="passwd" value="${vo.passwd}" required>
 
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="passwd-repeat" value="${vo.passwd}" required>
-
 	<label for="name"><b>Name</b></label>
 	<input type="text" placeholder="Enter Name" name="name" id="name" value="${vo.name}" required>
 
