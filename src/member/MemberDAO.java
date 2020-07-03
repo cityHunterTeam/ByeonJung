@@ -136,7 +136,7 @@ public class MemberDAO {
 		List membersList = new ArrayList();
 		try {
 			con = getConnection();
-			String query = "select * from member order by joinDate desc";
+			String query = "select * from member";
 			System.out.println(query);
 			pstmt = con.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
@@ -203,7 +203,7 @@ public class MemberDAO {
 		}
 	}
 	public MemberVO findMember(String id) {
-		MemberVO memInfo = null ;
+		MemberVO memInfo = new MemberVO() ;
 		try {
 			con = getConnection();
 			String query = "select * from member where id =?";
@@ -212,14 +212,13 @@ public class MemberDAO {
 			System.out.println(query);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			String id1 = rs.getString("id");
-			String passwd = rs.getString("passwd");
-			String name = rs.getString("name");
-			String address = rs.getString("address");
-			String birth = rs.getString("birth");
-			String phone = rs.getString("phone");
-			String email = rs.getString("email");
-			memInfo = new MemberVO(id,passwd,name,address,birth,phone,email);
+			memInfo.setId( rs.getString("id"));
+			memInfo.setPasswd(rs.getString("passwd"));
+			memInfo.setName(rs.getString("name"));
+			memInfo.setAddress(rs.getString("address"));
+			memInfo.setBirth(rs.getString("birth"));
+			memInfo.setPhone(rs.getString("phone"));
+			memInfo.setEmail(rs.getString("email"));
 			freeResource();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -257,7 +256,7 @@ public class MemberDAO {
 		try { 
 			con =getConnection();
 			
-			String query = "delete from member where id = ?" ;
+			String query = "delete from member" ;
 			System.out.println(query);
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);

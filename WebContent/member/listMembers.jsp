@@ -60,7 +60,10 @@ a {
 			</c:when>
 			<c:when test="${membersList != null}">
 				<c:forEach var="mem" items="${membersList }">
-					<tr align="center">
+				<c:url var="url2" value="/mem/memberView.do">
+					<c:param name="id" value="${mem.id}"/>
+				</c:url>
+					<tr align="center" onclick="location.href='${url2}'"> 
 						<td>${mem.id }</td>
 						<td>${mem.passwd }</td>
 						<td>${mem.name }</td>
@@ -68,13 +71,16 @@ a {
 						<td>${mem.birth }</td>
 						<td>${mem.phone }</td>
 						<td>${mem.email }</td>
-						<td><a href="${contextPath }/member/modMemberForm.do? id=${mem.id}">수정</a></td>
-						<td><a href="${contextPath }/member/delMember.do? id=${mem.id}">삭제</a></td>
+		
 					</tr>
 				</c:forEach>
 			</c:when>
 		</c:choose>
 	</table>
+	
+		<c:url var="url1" value="/mem/modMemberForm.do">
+				<c:param name="id" value="${mem.id}"/>
+		</c:url>
 </body>
 <jsp:include page="../inc/footer.jsp" />
 </html>

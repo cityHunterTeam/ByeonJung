@@ -7,9 +7,10 @@
 <body>
 
 	<script>
-		window.alert("회원탈퇴가 완료되었습니다.");
-		location.href = "${contextPath}/mem/index.do";
+		window.alert("회원정보 수정을 완료하였습니다.");
+		location.href = "${contextPath}/mem/listMembers.do";
 	
 	</script>
 </body>
+
 </html>

@@ -43,9 +43,9 @@ public class MemberController extends HttpServlet {
 		System.out.println("action:" + action);
 
 		if (action.equals("/join.do")) {
-			
+
 			nextPage = "/member/join.jsp";
-			
+
 		} else if (action.equals("/joinPro.do")) {
 			String id = request.getParameter("id");
 			String passwd = request.getParameter("passwd");
@@ -57,13 +57,13 @@ public class MemberController extends HttpServlet {
 			MemberVO memberVO = new MemberVO(id, passwd, name, birth, email, phone, address);
 			memberDAO.addMember(memberVO);
 			nextPage = "/member/joinPro.jsp";
-			
+
 		} else if (action.equals("/login.do")) {
-			
+
 			nextPage = "/member/login.jsp";
-			
+
 		} else if (action.equals("/loginPro.do")) {
-			
+
 			String id = request.getParameter("id");
 			String passwd = request.getParameter("passwd");
 			int chk = memberDAO.loginCheck(id, passwd);
@@ -74,17 +74,17 @@ public class MemberController extends HttpServlet {
 			} else {
 				nextPage = "/member/loginFail.jsp";
 			}
-			
+
 		} else if (action.equals("/index.do")) {
-			
+
 			nextPage = "../index.jsp";
-			
+
 		} else if (action.equals("/logout.do")) {
-			
+
 			HttpSession session = request.getSession();
 			session.invalidate();
 			nextPage = "/member/logout.jsp";
-			
+
 		} else if (action.equals("/myCheck.do")) {
 
 			nextPage = "../member/mypageCheck.jsp";
@@ -102,9 +102,9 @@ public class MemberController extends HttpServlet {
 			} else {
 				nextPage = "/member/mypageFail.jsp";
 			}
-			
+
 		} else if (action.equals("/mypagePro.do")) {
-			
+
 			String passwd = request.getParameter("passwd");
 			String name = request.getParameter("name");
 			String birth = request.getParameter("birth");
@@ -115,55 +115,45 @@ public class MemberController extends HttpServlet {
 			MemberVO vo2 = new MemberVO(passwd, name, birth, email, phone, address);
 			memberDAO.updateAll(vo2);
 			nextPage = "/member/mypagePro.jsp";
-			
-		} else if(action.equals("/deleteMem.do")) {
-			
+
+		} else if (action.equals("/deleteMem.do")) {
+
 			HttpSession session = request.getSession();
-			String id = (String)session.getAttribute("id");
+			String id = (String) session.getAttribute("id");
 			memberDAO.deleteMem(id);
 			session.invalidate();
 			nextPage = "/member/deleteMem.jsp";
-			
-		}else {
-			nextPage = "/mem/index.do";
-		}
-		
-		if(action==null || action.equals("/listMembers.do")) {
+		} else if (action.equals("/listMembers.do")) {
 			List membersList = memberDAO.listMembers();
-			
 			request.setAttribute("membersList", membersList);
-			
 			nextPage = "/member/listMembers.jsp";
-		}else if(action.equals("/modMemberForm.do")) {
+
+		} else if (action.equals("/memberView.do")) {
 			String id = request.getParameter("id");
 			MemberVO memInfo = memberDAO.findMember(id);
-			request.setAttribute("memInfo", memInfo);
-			nextPage = "/member/memberForm.jsp";
-		}else if(action.equals("/modMember.do")) {
-			String id = request.getParameter("id");
+			request.setAttribute("vo", memInfo);
+			nextPage = "/member/memberView.jsp";
+
+		} else if (action.equals("/memberViewPro.do")) {
+
 			String passwd = request.getParameter("passwd");
 			String name = request.getParameter("name");
 			String birth = request.getParameter("birth");
 			String email = request.getParameter("email");
 			String phone = request.getParameter("phone");
 			String address = request.getParameter("address");
-			
-			MemberVO memberVO = new MemberVO(id,passwd,name,birth,email,phone,address);
-			
-			memberDAO.modMember(memberVO);
-			
-			request.setAttribute("msg", "modified");
-			
-			nextPage="/member/listMembers.do";
-		}else if(action.equals("/delMembers.do")) {
+
+			MemberVO vo3 = new MemberVO(passwd, name, birth, email, phone, address);
+			memberDAO.updateAll(vo3);
+			nextPage = "/member/memberViewPro.jsp";
+
+		} else if (action.equals("/delMembers.do")) {
 			String id = request.getParameter("id");
 			memberDAO.deleteMem(id);
 			request.setAttribute("msg", "deleted");
-			nextPage="/member/listMembers.do";
-		}else {
-			List membersList = memberDAO.listMembers();
-			request.setAttribute("membersList", membersList);
-			nextPage = "/member/listMembers.jsp";
+			nextPage = "/member/delMembers.jsp";
+		} else {
+			nextPage = "/mem/index.do";
 		}
 		RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 		dispatch.forward(request, response);
