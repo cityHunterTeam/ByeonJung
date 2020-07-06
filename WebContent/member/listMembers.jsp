@@ -71,6 +71,8 @@ a {
 						<td>${mem.email }</td>
 						<td>${mem.phone }</td>
 						<td>${mem.address }</td>
+						<td><a href="delMembers.do?id=${mem.id}">삭제</a></td>
+						<td><a href="memberView.do?id=${mem.id}">수정</a></td>
 					</tr>
 				</c:forEach>
 			</c:when>

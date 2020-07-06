@@ -35,7 +35,6 @@
 	
 	<label for="address"><b>Address</b></label>
 	<input type="text" name="address" id="address" placeholder="Address" value="${vo.address}" required >
-	
     <div class="clearfix">
       <button type="button" class="cancelbtn" onclick="location.href='${contextPath}/mem/delMembers.do">회원삭제</button>
       <button type="submit" class="signupbtn">회원정보 수정</button>

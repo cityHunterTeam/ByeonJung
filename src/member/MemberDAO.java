@@ -251,7 +251,7 @@ public class MemberDAO {
 		try { 
 			con =getConnection();
 			
-			String query = "delete from member" ;
+			String query = "delete from member where id = ?";
 			System.out.println(query);
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
@@ -259,6 +259,7 @@ public class MemberDAO {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		freeResource();
 	}//delMember
 	
 }

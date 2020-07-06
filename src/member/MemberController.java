@@ -148,9 +148,9 @@ public class MemberController extends HttpServlet {
 			
 		} else if (action.equals("/delMembers.do")) {
 			String id = request.getParameter("id");
-			memberDAO.deleteMem(id);
+			memberDAO.delMember(id);
 			request.setAttribute("msg", "deleted");
-			nextPage = "/member/delMembers.jsp";
+			nextPage = "/member/delMember.jsp";
 		} else {
 			nextPage = "/mem/index.do";
 		}
