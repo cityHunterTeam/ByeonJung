@@ -27,7 +27,6 @@
 	<br><br>
     <button type="submit">Login</button>
 	<button style="background-color: orange;" onclick="location.href='${contextPath}/mem/join.do'">Sign up</button>
-    
   </div>
 
   

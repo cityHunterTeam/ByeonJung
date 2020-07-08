@@ -9,7 +9,6 @@
 	<script>
 		window.alert("로그인에 성공하였습니다.");
 		location.href = "${contextPath}/mem/index.do";
-	
 	</script>
 </body>
 

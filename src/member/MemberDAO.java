@@ -163,16 +163,15 @@ public class MemberDAO {
 	public void updateAll(MemberVO vo) {
 		try {
 			con = getConnection();
-			String query = "update member set passwd=?,name=?,birth=?,email=?,phone=?,address=?";
+			String query = "update member set passwd=?,name=?,birth=?,email=?,phone=?,address=? ";
 			pstmt = con.prepareStatement(query);
-			 
 			pstmt.setString(1,vo.getPasswd());
 			pstmt.setString(2,vo.getName());
 			pstmt.setString(3,vo.getBirth());
 			pstmt.setString(4,vo.getEmail());
 			pstmt.setString(5,vo.getPhone());
 			pstmt.setString(6,vo.getAddress());
-			
+
 			pstmt.executeUpdate();	//update 실행 
 
 				
@@ -211,7 +210,7 @@ public class MemberDAO {
 			pstmt.setString(1, id);
 			System.out.println(query);
 			ResultSet rs = pstmt.executeQuery();
-			rs.next();
+			while(rs.next()) {
 			memInfo.setId( rs.getString("id"));
 			memInfo.setPasswd(rs.getString("passwd"));
 			memInfo.setName(rs.getString("name"));
@@ -219,6 +218,8 @@ public class MemberDAO {
 			memInfo.setEmail(rs.getString("email"));
 			memInfo.setPhone(rs.getString("phone"));
 			memInfo.setAddress(rs.getString("address"));
+			
+			}
 			freeResource();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -226,10 +227,12 @@ public class MemberDAO {
 		return memInfo;
 	}
 	
+	//회원 정보 수정
 	public void updateMember(MemberVO vo) {
-		try {
+		
+		try {	
 			con = getConnection();
-			String query = "update member set passwd=?,name=?,birth=?,email=?,phone=?,address=?";
+			String query = "update member set passwd=?,name=?,birth=?,email=?,phone=?,address=? where id=?";
 			pstmt = con.prepareStatement(query);
 			 
 			pstmt.setString(1,vo.getPasswd());
@@ -238,19 +241,20 @@ public class MemberDAO {
 			pstmt.setString(4,vo.getEmail());
 			pstmt.setString(5,vo.getPhone());
 			pstmt.setString(6,vo.getAddress());
-			
+			pstmt.setString(7,vo.getId());
 			pstmt.executeUpdate();	//update 실행 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			freeResource();
 		}
 	}
-	
+		
+	//회원 정보 삭제
 	public void delMember(String id) {
 		try { 
 			con =getConnection();
-			
 			String query = "delete from member where id = ?";
 			System.out.println(query);
 			pstmt = con.prepareStatement(query);
