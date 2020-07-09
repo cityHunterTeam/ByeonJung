@@ -8,7 +8,7 @@
 
 	<script>
 		window.alert("회원탈퇴가 완료되었습니다.");
-		location.href = "${contextPath}/mem/listMembers.do";
+		location.href = "${contextPath}/adm/listMembers.do";
 	
 	</script>
 </body>

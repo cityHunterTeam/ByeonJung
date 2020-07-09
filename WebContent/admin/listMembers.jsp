@@ -26,6 +26,10 @@
 	text-decoration: none;
 }
 
+table, th, td {
+  border: 1px solid black;
+}
+
 .cls2 {
 	text-align: center;
 	font-size: 30px;
@@ -34,6 +38,10 @@
 a {
 	text-align: center;
 }
+.page-link {display: inline-block !important;}
+
+.center {text-align: center;}
+
 </style>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -60,10 +68,10 @@ a {
 			</c:when>
 			<c:when test="${membersList != null}">
 				<c:forEach var="mem" items="${membersList }">
-				<c:url var="url2" value="/mem/memberView.do">
+				<c:url var="url4" value="/adm/memberView.do">
 					<c:param name="id" value="${mem.id}"/>
 				</c:url>
-					<tr align="center" onclick="location.href='${url2}'"> 
+					<tr align="center" onclick="location.href='${url4}'"> 
 						<td>${mem.id }</td>
 						<td>${mem.passwd }</td>
 						<td>${mem.name }</td>
@@ -79,9 +87,33 @@ a {
 		</c:choose>
 	</table>
 	
-		<c:url var="url1" value="/mem/modMemberForm.do">
+		<div class="center">
+   <c:if test="${count > 0}">
+      <c:if test="${startPage > pageBlock}">
+         <c:url var="url1" value="/adm/listMembers.do">
+            <c:param name="pageNum" value="${startPage-pageBlock}"/>
+         </c:url>
+         <a style="font-size: x-large;" class="page-link" href='${url1}'>Previous</a>
+      </c:if>
+      <c:forEach var="i" begin="${startPage}" end="${endPage}">
+      <c:url var="url2" value="/adm/listMembers.do">
+      <c:param name="pageNum" value="${i}"/>
+      </c:url>
+         <a style="font-size: x-large;" class="page-link" href='${url2}'>${i}</a>
+      </c:forEach>
+      
+      <c:if test="${endPage < pageCount}">
+         <c:url var="url3" value="/adm/listMembers.do">
+            <c:param name="pageNum" value="${startPage+pageBlock}"/>
+         </c:url>
+         <a style="font-size: x-large;" class="page-link" href='${url3}'>Next</a>
+      </c:if>
+   </c:if>
+</div>
+		<%-- <c:url var="url5" value="/adm/modMemberForm.do">
 				<c:param name="id" value="${mem.id}"/>
-		</c:url>
+		</c:url> --%>
+	
 </body>
 <jsp:include page="../inc/footer.jsp" />
 </html>

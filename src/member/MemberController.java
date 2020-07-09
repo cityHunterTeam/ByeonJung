@@ -123,36 +123,6 @@ public class MemberController extends HttpServlet {
 			memberDAO.deleteMem(id);
 			session.invalidate();
 			nextPage = "/member/deleteMem.jsp";
-		} else if (action.equals("/listMembers.do")) {
-			List membersList = memberDAO.listMembers();
-			request.setAttribute("membersList", membersList);
-			nextPage = "/member/listMembers.jsp";
-
-		} else if (action.equals("/memberView.do")) {
-			String id = request.getParameter("id");
-			MemberVO memInfo = memberDAO.findMember(id);
-			request.setAttribute("vo", memInfo);
-			nextPage = "/member/memberView.jsp";
-
-		} else if (action.equals("/memberViewPro.do")) {
-			
-			String id = request.getParameter("id");
-			String passwd = request.getParameter("passwd");
-			String name = request.getParameter("name");
-			String birth = request.getParameter("birth");
-			String email = request.getParameter("email");
-			String phone = request.getParameter("phone");
-			String address = request.getParameter("address");
-			MemberVO vo = new MemberVO(id, passwd, name, birth, email, phone, address);
-			memberDAO.updateMember(vo);
-
-			nextPage = "/member/memberViewPro.jsp";
-			
-		} else if (action.equals("/delMembers.do")) {
-			String id = request.getParameter("id");
-			memberDAO.delMember(id);
-			request.setAttribute("msg", "deleted");
-			nextPage = "/member/delMember.jsp";
 		} else {
 			nextPage = "/mem/index.do";
 		}

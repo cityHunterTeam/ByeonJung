@@ -11,14 +11,14 @@
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 	<c:set var="vo" value="${vo}" />
-	<form action="${contextPath}/mem/memberViewPro.do" method="post"
+	<form action="${contextPath}/adm/memberViewPro.do" method="post"
 		style="border: 1px solid #ccc">
 		<div class="container">
 			<h1>회원정보 수정</h1>
 			<hr>
 			<label for="id"><b>Id</b></label> <input type="text"
 				placeholder="Enter Id" name="id" value="${vo.id}" readonly>
-
+			
 			<label for="psw"><b>Password</b></label>
 			 <input type="password" placeholder="Enter Password" name="passwd" value="${vo.passwd}"required> 
 			<label for="name"><b>Name</b></label>
@@ -33,8 +33,9 @@
 			<input type="text" name="address" id="address" placeholder="Address"
 				value="${vo.address}" required>
 			<div class="clearfix">
+			
 				<button type="button" class="cancelbtn"
-					onclick="location.href='${contextPath}/mem/delMembers.do">회원삭제</button>
+					onclick="location.href='${contextPath}/adm/delMembers.do">회원삭제</button>
 				<button type="submit" class="signupbtn">회원정보 수정</button>
 			</div>
 		</div>

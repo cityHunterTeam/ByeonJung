@@ -113,7 +113,7 @@ public class MemberDAO {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-
+			
 			if(rs.next()) {
 				vo.setId(rs.getString("id"));
 				vo.setPasswd(rs.getString("passwd"));
@@ -200,70 +200,5 @@ public class MemberDAO {
 			freeResource();
 		
 		}
-	}
-	public MemberVO findMember(String id) {
-		MemberVO memInfo = new MemberVO() ;
-		try {
-			con = getConnection();
-			String query = "select * from member where id =?";
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, id);
-			System.out.println(query);
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
-			memInfo.setId( rs.getString("id"));
-			memInfo.setPasswd(rs.getString("passwd"));
-			memInfo.setName(rs.getString("name"));
-			memInfo.setBirth(rs.getString("birth"));
-			memInfo.setEmail(rs.getString("email"));
-			memInfo.setPhone(rs.getString("phone"));
-			memInfo.setAddress(rs.getString("address"));
-			
-			}
-			freeResource();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return memInfo;
-	}
-	
-	//회원 정보 수정
-	public void updateMember(MemberVO vo) {
-		
-		try {	
-			con = getConnection();
-			String query = "update member set passwd=?,name=?,birth=?,email=?,phone=?,address=? where id=?";
-			pstmt = con.prepareStatement(query);
-			 
-			pstmt.setString(1,vo.getPasswd());
-			pstmt.setString(2,vo.getName());
-			pstmt.setString(3,vo.getBirth());
-			pstmt.setString(4,vo.getEmail());
-			pstmt.setString(5,vo.getPhone());
-			pstmt.setString(6,vo.getAddress());
-			pstmt.setString(7,vo.getId());
-			pstmt.executeUpdate();	//update 실행 
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			freeResource();
-		}
-	}
-		
-	//회원 정보 삭제
-	public void delMember(String id) {
-		try { 
-			con =getConnection();
-			String query = "delete from member where id = ?";
-			System.out.println(query);
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, id);
-			pstmt.executeUpdate();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		freeResource();
 	}//delMember
-	
 }

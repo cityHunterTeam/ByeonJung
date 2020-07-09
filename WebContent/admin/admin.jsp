@@ -71,7 +71,7 @@ a{
 	</table>
 	<c:if test="${not empty sessionScope.id}">
 	<div class="form-group text-center text-lg-center">
-		<button type="button" class="btn btn-secondary" onclick="location.href='${contextPath}/admin/adminWritePro.do'">글쓰기</button>			
+		<button type="button" class="btn btn-secondary" onclick="location.href='${contextPath}/adm/adminWritePro.do'">글쓰기</button>			
 	</div>
 	</c:if>
 	<div class="row">
@@ -79,21 +79,20 @@ a{
 			<ul class="pagination justify-content-center">
 			<c:if test="${count > 0}">
 				<c:if test="${startPage > pageBlock}">
-					<c:url var="url1" value="/brd/list.do">
+					<c:url var="url1" value="/adm/adminlist.do">
 						<c:param name="pageNum" value="${startPage-pageBlock}"/>
 					</c:url>
 						<a style="font-size: xx-large;" class="page-link" href='${url1}'>Previous</a>
 				</c:if>
-			
+				
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<c:url var="url2" value="/admin/adminlist.do">
+				<c:url var="url2" value="/adm/adminlist.do">
 				<c:param name="pageNum" value="${i}"/>
 				</c:url>
 						<a style="font-size: xx-large;" class="page-link" href='${url2}'>${i}</a>
 				</c:forEach>
-				
 				<c:if test="${endPage < pageCount}">
-					<c:url var="url3" value="/admin/adminlist.do">
+					<c:url var="url3" value="/adm/adminlist.do">
 						<c:param name="pageNum" value="${startPage+pageBlock}"/>
 					</c:url>
 						<a style="font-size: xx-large;" class="page-link" href='${url3}'>Next</a>

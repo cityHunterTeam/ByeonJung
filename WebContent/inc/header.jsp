@@ -120,13 +120,13 @@
                                   <c:set var="id" value="${sessionScope.id }"/>
                                     <c:if test="${id.equals('admin')}">
                                       <li class="nav-item dropdown">
-                                           <a class="nav-link dropdown-toggle" href="${contextPath}/mem/listMembers.do" id="navbarDropdown_2"
+                                           <a class="nav-link dropdown-toggle" href="${contextPath}/adm/listMembers.do" id="navbarDropdown_2"
                                             role="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
                                            	관리자
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                           <a class="dropdown-item" href="${contextPath}/mem/listMembers.do">회원정보수정</a>
+                                           <a class="dropdown-item" href="${contextPath}/adm/listMembers.do">회원정보수정</a>
                                             <a class="dropdown-item" href="../tour_details.jsp">1:1 문의 게시판</a>
                                             <a class="dropdown-item" href="../elements.jsp">관리</a>
                                         </div>  

@@ -16,7 +16,7 @@
 
 <body>
 <h1 style="text-align:center">새 글 쓰기</h1>
-<form name="articleForm" method="post" action="${contextPath}/admin/adminWritePro.do" >
+<form name="articleForm" method="post" action="${contextPath}/adm/adminWritePro.do" >
 
 <table border="0" align="center">
 <tr>
@@ -36,7 +36,7 @@
 	<td align="right"></td>
 	<td colspan="2">
 	<input type="submit" value="글쓰기"/>
-	<input type=button value="목록보기" onclick="location.href='${contextPath}/admin/adminlist.do';"/>
+	<input type=button value="목록보기" onclick="location.href='${contextPath}/adm/adminlist.do';"/>
 	</td>
 </tr>
 </table>

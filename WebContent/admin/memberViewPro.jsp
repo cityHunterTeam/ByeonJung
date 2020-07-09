@@ -8,7 +8,7 @@
 
 	<script>
 		window.alert("회원정보 수정을 완료하였습니다.");
-		location.href = "${contextPath}/mem/listMembers.do";
+		location.href = "${contextPath}/adm/listMembers.do";
 	
 	</script>
 </body>
